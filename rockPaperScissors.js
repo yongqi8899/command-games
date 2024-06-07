@@ -1,19 +1,30 @@
-const playerMove = process.argv[2]
-const moves = ['rock', 'paper', 'scissors']
-let computerMove = moves[Math.floor(Math.random()*moves.length)]
-function determineWinner(playerInput, computer){
-    let player = playerInput.toLowerCase()
-    let result
-    if (!moves.includes(player)){
-        result = `Please move 'rock', 'paper' or 'scissors'`
-    } else if (player === computer){
-        result = 'draw'
+class DetermineWinner {
+    #moves = ['rock', 'paper', 'scissors']
+    #message
+    constructor(message){
+        this.#message = message
     }
-    else if (player === 'rock' && computer === 'scissors' || player === 'paper' && computer === 'rock' || player === 'scissors' && computer === 'paper'){
-        result = 'you are winner'
-    } else {
-        result = `Better luck next time`
+    computerMove(){
+        return this.#moves[Math.floor(Math.random()*(this.#moves.length))]
     }
-    return console.log(result)
+    playerMove(){
+        return process.argv[2].toLowerCase()
+    }
+    compare(player, computer){
+        if (!this.#moves.includes(player)){
+            this.#message = `Please move 'rock', 'paper' or 'scissors'`
+        } else if (player === computer){
+            this.#message = 'draw'
+        }
+        else if (player === 'rock' && computer === 'scissors' || player === 'paper' && computer === 'rock' || player === 'scissors' && computer === 'paper'){
+            this.#message = 'you are winner'
+        } else {
+            this.#message = `Better luck next time`
+        }
+        return this.#message
+    }
 }
-determineWinner(playerMove, computerMove)
+const determineWinner = new DetermineWinner()
+let player = determineWinner.playerMove()
+let computer = determineWinner.computerMove()
+console.log(determineWinner.compare(player, computer))
