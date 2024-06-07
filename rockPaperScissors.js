@@ -11,9 +11,9 @@ class DetermineWinner {
     return process.argv[2].toLowerCase();
   }
   compare() {
-    const player = this.playerMove(); // Call playerMove() inside compare()
-    const computer = this.computerMove(); // Call computerMove() inside compare()
-
+    const player = this.playerMove(); 
+    const computer = this.computerMove(); 
+    
     if (!this.#moves.includes(player)) {
       this.#message = `Please move 'rock', 'paper' or 'scissors'`;
     } else if (player === computer) {
