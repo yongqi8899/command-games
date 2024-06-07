@@ -1,17 +1,15 @@
 class DetermineWinner {
   #moves = ["rock", "paper", "scissors"];
   #message;
-  constructor(message) {
-    this.#message = message;
+  #playerMove;
+  constructor(playerMove) {
+    this.#playerMove = playerMove;
   }
   computerMove() {
     return this.#moves[Math.floor(Math.random() * this.#moves.length)];
   }
-  playerMove() {
-    return process.argv[2].toLowerCase();
-  }
   compare() {
-    const player = this.playerMove(); 
+    const player = this.#playerMove; 
     const computer = this.computerMove(); 
     
     if (!this.#moves.includes(player)) {
@@ -30,5 +28,6 @@ class DetermineWinner {
     return this.#message;
   }
 }
-const determineWinner = new DetermineWinner();
+let playerMove = process.argv[2].toLowerCase();
+const determineWinner = new DetermineWinner(playerMove);
 console.log(determineWinner.compare());
